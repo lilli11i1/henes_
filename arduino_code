@@ -35,10 +35,6 @@ ros::Publisher cmd_pub("cmd_vel2", &cmd_vel);
 #define MOTOR3_DIR 9
 #define MOTOR3_Brake 10
 
-digitalWrite(MOTOR1_Brake, LOW);
-digitalWrite(MOTOR2_Brake, LOW);
-digitalWrite(MOTOR3_Brake, LOW);
-
 void first_Step(int velocity_1) // @@ forward @@
 {
   digitalWrite(MOTOR1_DIR, HIGH);
@@ -128,7 +124,9 @@ void setup()
 
 void loop() 
 {
-  // put your main code here, to run repeatedly:
+  digitalWrite(MOTOR1_Brake, LOW);
+  digitalWrite(MOTOR2_Brake, LOW);
+  digitalWrite(MOTOR3_Brake, LOW);
 
   motor_control();
 
