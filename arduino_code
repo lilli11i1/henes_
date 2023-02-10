@@ -132,5 +132,9 @@ void loop()
 
   motor_control();
 
+  cmd_vel.linear.x = velocity;
+  cmd_vel.angular.z = steer_angle;
   cmd_pub.publish(&cmd_vel);
+
+  nh.spinOnce();
 }
