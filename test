@@ -1,0 +1,43 @@
+#include <ros.h>
+#include <geometry_msgs/Twist.h>
+#include <std_msgs/Int32.h>
+
+ros::NodeHandle  nh; 
+std_msgs::Int32 str_msg;
+geometry_msgs::Twist cmd_vel; 
+
+#include<Servo.h> //Servo 라이브러리를 추가
+Servo servo;      //Servo 클래스로 servo객체 생성
+int value = 0;    // 각도를 조절할 변수 value
+
+ros::Subscriber<geometry_msgs::Twist> teleop_cmd_sub("teleop_cmd_vel_ooo", cmd_vel_callback);
+ros::Publisher cmd_pub("cmd_vel_ooo", &cmd_vel);
+
+void setup() {
+  Serial.begin(57600);
+  servo.attach(7);     //servo 서보모터 7번 핀에 연결
+}
+
+void loop() {
+    value = 0;
+    servo.write(value); //value값의 각도로 회전. ex) value가 90이라면 90도 회전
+    delay(1000);
+
+    value = 45;
+    servo.write(value);
+    delay(1000);
+
+    value = 90;
+    servo.write(value);
+    delay(500);
+
+    value = 135;
+    servo.write(value);
+    delay(500);
+
+    value = 179;
+    servo.write(value);
+    delay(500);
+
+    nh.spinOnce();
+}
